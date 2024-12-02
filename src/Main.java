@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
 
-public class Main {
+public class DayOne {
     public static void main(String[] args) {
 
         ArrayList<String> fileData = getFileData("src/Day1Input.txt");
