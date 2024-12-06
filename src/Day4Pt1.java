@@ -10,7 +10,7 @@ public class Main {
 
         ArrayList<String> fileData = getFileData("src/Day3Input.txt");
         int xmasCount = 0;
-        
+
 
         int rows = fileData.size();
         System.out.println(rows);
@@ -26,55 +26,73 @@ public class Main {
 
         for (int row = 0; row < rows; row++) {
             for (int column = 0; column < columns; column++) {
-                
+                if (checkMatch(wordSearch, row, column)) xmasCount++;
             }
         }
+
+        System.out.println(xmasCount);
 
 
     }
 
     public static boolean checkTop(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (row - 3 < 0) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row-1][column] + wordSearch[row-2][column] + wordSearch[row-3][column];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkBottom(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (row + 3 > wordSearch.length - 1) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row+1][column] + wordSearch[row+2][column] + wordSearch[row+3][column];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkLeft(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column - 3 < 0) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row][column-1] + wordSearch[row][column-2] + wordSearch[row][column-3];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkRight(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column + 3 < wordSearch[0].length-1) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row][column+1] + wordSearch[row][column+2] + wordSearch[row][column+3];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkDiagonalTopLeft(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column - 3 < 0 || row - 3 < 0) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row-1][column-1] + wordSearch[row-2][column-2] + wordSearch[row-3][column-3];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkDiagonalTopRight(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column + 3 < wordSearch[0].length-1 || row - 3 < 0) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row+1][column+1] + wordSearch[row+2][column+2] + wordSearch[row+3][column+3];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkDiagonalBottomLeft(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column - 3 < 0 || row + 3 < wordSearch.length-1) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row+1][column-1] + wordSearch[row+2][column-2] + wordSearch[row+3][column-3];
+        return xmas.equals("XMAS");
     }
 
     public static boolean checkDiagonalBottomRight(String[][] wordSearch, int row, int column) {
-
-        return false;
+        if (column + 3 < wordSearch[0].length-1 || row + 3 < wordSearch.length-1) return false;
+        String xmas = wordSearch[row][column] + wordSearch[row+1][column-1] + wordSearch[row+2][column-2] + wordSearch[row+3][column-3];
+        return xmas.equals("XMAS");
     }
-    
+
     public static boolean checkMatch(String[][] wordSearch, int row, int column) {
-        
+        if (checkTop(wordSearch,row,column)) return true;
+        if (checkBottom(wordSearch,row,column)) return true;
+        if (checkLeft(wordSearch,row,column)) return true;
+        if (checkRight(wordSearch,row,column)) return true;
+        if (checkDiagonalTopLeft(wordSearch,row,column)) return true;
+        if (checkDiagonalTopRight(wordSearch,row,column)) return true;
+        if (checkDiagonalBottomLeft(wordSearch,row,column)) return true;
+        if (checkDiagonalBottomRight(wordSearch,row,column)) return true;
+        return false;
     }
 
     public static ArrayList<String> getFileData(String fileName) {
