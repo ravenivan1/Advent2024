@@ -3,13 +3,14 @@ import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class Main {
+public class Day5Pt1 {
     public static void main(String[] args) {
 
         ArrayList<String> fileData = getFileData("src/Day5Input.txt");
         ArrayList<int[]> rules = new ArrayList<>();
         ArrayList<int[]> updates = new ArrayList<>();
         ArrayList<int[]> validUpdates = new ArrayList<>();
+        int middleSum = 0;
 
         for (String line : fileData) {
             if (line.contains("|")) {
@@ -35,10 +36,16 @@ public class Main {
             for (int[] rule : rules) {
                 if (checkValidRule(rule, update)) validRules.add(rule);
             }
-            System.out.println(validRules);
-            System.out.println(checkValidUpdate(validRules, update));;
-            System.out.println();
+            if (checkValidUpdate(validRules, update)) validUpdates.add(update);
         }
+
+        for (int[] validUpdate: validUpdates) {
+            middleSum += validUpdate[(validUpdate.length - 1) / 2];
+        }
+
+        System.out.println(middleSum);
+
+
 
 
     }
